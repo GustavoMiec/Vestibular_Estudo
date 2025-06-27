@@ -27,11 +27,15 @@ def calcular_prioridade(materias):
 
 def gerar_plano_revisao(materias):
     hoje = datetime.date.today()
-    espacamentos = [1, 3, 7, 30]
+    espacamentos = [0, 3, 10, 40]  
     for i, materia in enumerate(materias):
-        data_base = hoje + datetime.timedelta(days=i)
-        materia['Revisões'] = [str(data_base + datetime.timedelta(days=d)) for d in espacamentos]
+        data_base = hoje + datetime.timedelta(days=1 + i)
+        revisoes = [str(data_base + datetime.timedelta(days=d)) for d in espacamentos]
+        materia['Início'] = str(data_base)
+        materia['Revisões'] = revisoes
     return materias
+
+
 
 def salvar_csv():
     df = pd.DataFrame(st.session_state.tabela_revisao)
