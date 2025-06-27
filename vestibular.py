@@ -17,15 +17,12 @@ def calcular_prioridade(materias):
 
 def gerar_plano_revisao(materias):
     hoje = datetime.date.today()
-    intervalo_revisao = 2
-    for materia in materias:
-        materia['Revisões'] = [
-            str(hoje + datetime.timedelta(days=intervalo_revisao)),
-            str(hoje + datetime.timedelta(days=intervalo_revisao + 5)),
-            str(hoje + datetime.timedelta(days=intervalo_revisao + 10))
-        ]
-        intervalo_revisao += 3
+    espacamentos = [1, 3, 7, 90]
+    for i, materia in enumerate(materias):
+        data_base = hoje + datetime.timedelta(days=i)  # Escalonando matérias
+        materia['Revisões'] = [str(data_base + datetime.timedelta(days=delta)) for delta in espacamentos]
     return materias
+
 
 def adicionar_materia(nome, total, erros, categoria):
     st.session_state.tabela_revisao.append({
