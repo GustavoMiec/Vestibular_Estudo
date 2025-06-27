@@ -27,7 +27,7 @@ def calcular_prioridade(materias):
 
 def gerar_plano_revisao(materias):
     hoje = datetime.date.today()
-    espacamentos = [1, 3, 7, 90]
+    espacamentos = [1, 3, 7, 30]
     for i, materia in enumerate(materias):
         data_base = hoje + datetime.timedelta(days=i)
         materia['Revisões'] = [str(data_base + datetime.timedelta(days=d)) for d in espacamentos]
